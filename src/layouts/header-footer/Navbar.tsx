@@ -109,7 +109,7 @@ function Navbar() {
                   placeholder="Search"
                   aria-label="Search"
                 />
-                <button className="btn btn-outline-success" type="submit">
+                <button className="btn btn-outline-light" type="submit">
                   Search
                 </button>
               </form>
