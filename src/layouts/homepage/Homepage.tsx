@@ -1,6 +1,6 @@
 import React from "react";
 import Banner from "./components/Banner";
-import Carousel from "./components/Carousel";
+import Carousel from "./components/carousel/Carousel";
 import BookList from "../product/BookList";
 function Homepage(){
     return(
