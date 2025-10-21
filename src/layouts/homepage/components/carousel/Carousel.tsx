@@ -1,24 +1,44 @@
 import React, { useEffect, useState } from "react";
 import Carousel_Item from "./components/Carousel-Item";
 import BookModel from "../../../../models/BookModel";
-import { getAllBooks } from "../../../../api/BookAPI";
+import { get3Books} from "../../../../api/BookAPI";
 
 
 function Carousel() {
 
 
     const [bookList, setBookList] = useState<BookModel[]>([]);
+    const [loadingData, setLoadingData] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        getAllBooks().then(
+        get3Books().then(
             bookData => {
-                setBookList(bookData);
+                setBookList(bookData.result);
+                setLoadingData(false);
+            }
+        ).catch(
+            error => {
+                setError(error.message);
             }
         )
     }, []
     )
+    if (loadingData) {
+        return (
+            <div>
+                <h1>Loading...</h1>
+            </div>
+        );
+    }
 
-    const newList = bookList.slice(0,3);
+    if (error) {
+        return (
+            <div>
+                <h1>Error detected! ({error})</h1>
+            </div>
+        );
+    }
 
     return (
         <div>
@@ -26,8 +46,8 @@ function Carousel() {
 
                 <div className="carousel-inner">
                     {
-                        newList.map((book)=>(
-                            <Carousel_Item key={book.id} book={book} />
+                        bookList.map((book, index) => (
+                            <Carousel_Item key={book.id} book={book} index={index}/>
                         ))
                     }
                 </div>

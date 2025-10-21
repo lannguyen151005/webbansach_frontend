@@ -1,28 +1,57 @@
 import React, { useEffect, useState } from "react";
 import BookModel from "../../models/BookModel";
 import BookProps from "./components/BookProps";
-import { getAllBooks } from "../../api/BookAPI";
+import { findBook, getAllBooks } from "../../api/BookAPI";
+import { Pagination } from "../util/Pagination";
 
-const List: React.FC = () => {
+interface BookListProps {
+    keyword: string;
+}
+
+function List({ keyword }: BookListProps) {
+
 
     const [bookList, setBookList] = useState<BookModel[]>([]);
     const [loadingData, setLoadingData] = useState<boolean>(true);
     const [error, setError] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPage, setTotalPage] = useState(0);
+    const [totalBook, setTotalBook] = useState(0);
+
 
     useEffect(() => {
-        getAllBooks().then(
-            bookData => {
-                setBookList(bookData);
-                setLoadingData(false);
-            }
-        ).catch(
-            error => {
-                setError(error.message);
-            }
-        );
-    }, []
+        if (keyword === "") {
+            getAllBooks(currentPage - 1).then(
+                bookData => {
+                    setBookList(bookData.result);
+                    setTotalPage(bookData.totalPages);
+                    setLoadingData(false);
+                }
+            ).catch(
+                error => {
+                    setError(error.message);
+                }
+            );
+        } else {
+            findBook(keyword).then(
+                bookData => {
+                    setBookList(bookData.result);
+                    setTotalPage(bookData.totalPages);
+                    setLoadingData(false);
+                }
+            ).catch(
+                error => {
+                    setError(error.message);
+                }
+            );
+        }
+    }, [currentPage, keyword] //tu dong goi lai khi currentPage thay doi
     )
 
+    const paginate = (page: number) => {
+        setCurrentPage(page);
+    }
+    console.log(currentPage);
     if (loadingData) {
         return (
             <div>
@@ -39,6 +68,14 @@ const List: React.FC = () => {
         );
     }
 
+    if(bookList.length===0){
+        return(
+            <div>
+                <h1>Not found!</h1>
+            </div>
+        );
+    }
+
     return (
 
         <div className="container">
@@ -50,6 +87,7 @@ const List: React.FC = () => {
                     )
                 }
             </div>
+            <Pagination currentPage={currentPage} totalPage={totalPage} paginate={paginate} />
         </div>
     );
 }

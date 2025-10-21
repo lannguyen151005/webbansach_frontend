@@ -2,12 +2,18 @@ import React from "react";
 import Banner from "./components/Banner";
 import Carousel from "./components/carousel/Carousel";
 import BookList from "../product/BookList";
-function Homepage(){
+
+interface HomepageProps{
+    keyword: string
+}
+
+function Homepage({keyword}:HomepageProps){
+
     return(
         <div>
             <Banner/>
             <Carousel/>
-            <BookList/>
+            <BookList keyword={keyword}/>
         </div>
     );
 }

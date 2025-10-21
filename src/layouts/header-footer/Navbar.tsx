@@ -1,6 +1,22 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 
-function Navbar() {
+interface NavbarProps {
+  keyword: string;
+  setKeyword: (keyword: string) => void;
+}
+
+function Navbar({ keyword, setKeyword }: NavbarProps) {
+
+  const [tempKeyword, setTempKeyword] = useState('');
+
+  const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>)=>{
+    setTempKeyword(e.target.value);
+  }
+
+  const handleSearch= () =>{
+    setKeyword(tempKeyword);
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div className="container-fluid">
@@ -45,17 +61,17 @@ function Navbar() {
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown1">
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href="1">
                     Action
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href="2">
                     Adventure
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href="3">
                     Horror
                   </a>
                 </li>
@@ -102,31 +118,33 @@ function Navbar() {
 
           {/* Ô tìm kiếm */}
           <div className="d-flex">
-            <form className="d-flex me-3" role="search">
-                <input
-                  className="form-control me-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button className="btn btn-outline-light" type="submit">
-                  Search
-                </button>
-              </form>
+            <div className="d-flex me-3" role="search">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                onChange={onSearchInputChange}
+                value={tempKeyword}
+              />
+              <button className="btn btn-outline-light" type="button" onClick={handleSearch}>
+                Search
+              </button>
+            </div>
 
-              {/* Icon giỏ hàng và tài khoản */}
-              <ul className="navbar-nav d-flex flex-row">
-                <li className="nav-item me-3">
-                  <a className="nav-link" href="#">
-                    <i className="fas fa-shopping-cart fa-lg"></i>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    <i className="fas fa-user fa-lg"></i>
-                  </a>
-                </li>
-              </ul>
+            {/* Icon giỏ hàng và tài khoản */}
+            <ul className="navbar-nav d-flex flex-row">
+              <li className="nav-item me-3">
+                <a className="nav-link" href="#">
+                  <i className="fas fa-shopping-cart fa-lg"></i>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  <i className="fas fa-user fa-lg"></i>
+                </a>
+              </li>
+            </ul>
           </div>
 
         </div>
