@@ -6,9 +6,10 @@ import { Pagination } from "../util/Pagination";
 
 interface BookListProps {
     keyword: string;
+    genreId: number;
 }
 
-function List({ keyword }: BookListProps) {
+function List({ keyword, genreId }: BookListProps) {
 
 
     const [bookList, setBookList] = useState<BookModel[]>([]);
@@ -20,7 +21,7 @@ function List({ keyword }: BookListProps) {
 
 
     useEffect(() => {
-        if (keyword === "") {
+        if (keyword === "" && genreId ==0) {
             getAllBooks(currentPage - 1).then(
                 bookData => {
                     setBookList(bookData.result);
@@ -33,7 +34,7 @@ function List({ keyword }: BookListProps) {
                 }
             );
         } else {
-            findBook(keyword).then(
+            findBook(keyword, genreId).then(
                 bookData => {
                     setBookList(bookData.result);
                     setTotalPage(bookData.totalPages);
@@ -45,13 +46,13 @@ function List({ keyword }: BookListProps) {
                 }
             );
         }
-    }, [currentPage, keyword] //tu dong goi lai khi currentPage thay doi
+    }, [currentPage, keyword, genreId] //tu dong goi lai khi currentPage thay doi
     )
 
     const paginate = (page: number) => {
         setCurrentPage(page);
     }
-    console.log(currentPage);
+
     if (loadingData) {
         return (
             <div>

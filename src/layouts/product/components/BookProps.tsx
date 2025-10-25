@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import BookModel from "../../../models/BookModel";
 import BookImageModel from "../../../models/BookImageModel";
 import { getAllImages } from "../../../api/BookImageAPI";
+import { Link } from "react-router-dom";
 
 interface BookProps {
     book: BookModel;
@@ -50,13 +51,17 @@ const BookProps: React.FC<BookProps> = ({ book }) => {
                 <div style={{ height: '200px' }}>
                     {
                         imageList[0] &&
-                        imageList[0].data && 
-                        <img src={imageList[0].data} className="card-img-top" alt={book.name} height={'200px'} />
+                        imageList[0].data &&
+                        <Link to={`/books/${book.id}`}>
+                            <img src={imageList[0].data} className="card-img-top" alt={book.name} height={'200px'} />
+                        </Link>
                     }
                 </div>
                 <div className="text-start">
                     <div className="card-body">
-                        <h5 className="card-title">{book.name}</h5>
+                        <Link to={`/books/${book.id}`} style={{textDecoration: 'none'}}>
+                            <h5 className="card-title">{book.name}</h5>
+                        </Link>
                         <p className="card-text">{book.description}</p>
                         <p className="card-text">
                             <span className="text-decoration-line-through me-3">{book.listedPrice}</span>

@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 interface NavbarProps {
   keyword: string;
@@ -42,38 +43,38 @@ function Navbar({ keyword, setKeyword }: NavbarProps) {
           {/* Các liên kết bên trái */}
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
+              <NavLink className="nav-link active" aria-current="page" to="/">
                 Home
-              </a>
+              </NavLink>
             </li>
 
             {/* Dropdown 1 */}
             <li className="nav-item dropdown">
-              <a
+              <Link
                 className="nav-link dropdown-toggle"
                 id="navbarDropdown1"
-                href="#"
+                to="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Genre
-              </a>
+              </Link>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown1">
                 <li>
-                  <a className="dropdown-item" href="1">
+                  <Link className="dropdown-item" to="/1">
                     Action
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="2">
+                  <Link className="dropdown-item" to="/2">
                     Adventure
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="3">
+                  <Link className="dropdown-item" to="/3">
                     Horror
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </li>

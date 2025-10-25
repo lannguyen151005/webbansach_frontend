@@ -50,11 +50,48 @@ export async function get3Books(): Promise<resultInterface> {
     return getBooks(endpoint);
 }
 
-export async function findBook(keyword: string) {
+export async function findBook(keyword: string, genreId: number) {
     let endpoint = `http://localhost:8080/books?sort=id,desc&size=4&page=0`;
 
-    if (keyword !== "") {
+    if (keyword !== "" && genreId == 0) {
         endpoint = `http://localhost:8080/books/search/findByNameContaining?sort=id,desc&size=8&page=0&name=${keyword}`;
+    } else if (keyword === "" && genreId > 0) {
+        endpoint = `http://localhost:8080/books/search/findByGenreList_Id?sort=id,desc&size=8&page=0&id=${genreId}`;
+    } else {
+        endpoint = `http://localhost:8080/books/search/findByNameContainingAndGenreList_Id?sort=id,desc&size=8&page=0&name=${keyword}&id=${genreId}`;
     }
     return getBooks(endpoint);
+}
+
+export async function getBookById(id: number): Promise<BookModel | null> {
+    let endpoint = `http://localhost:8080/books/${id}`;
+
+    try {
+        //goi phuong thuc request
+        const response = await fetch(endpoint);
+
+        if (!response.ok) {
+            throw new Error('There is an error when calling getBookById API!');
+        }
+
+        const bookData = await response.json();
+
+        if (bookData) {
+            return new BookModel(
+                bookData.id,
+                bookData.name,
+                bookData.price,
+                bookData.listedPrice,
+                bookData.description,
+                bookData.quantity,
+                bookData.author,
+                bookData.averageRating
+            )
+        } else {
+            throw new Error('Book does not exist!');
+        }
+    } catch (error) {
+        console.error("Error", error);
+        return null;
+    }
 }
