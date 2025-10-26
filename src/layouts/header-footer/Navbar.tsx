@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
+import { Search } from "react-bootstrap-icons";
 import { Link, NavLink } from "react-router-dom";
 
 interface NavbarProps {
@@ -129,7 +130,7 @@ function Navbar({ keyword, setKeyword }: NavbarProps) {
                 value={tempKeyword}
               />
               <button className="btn btn-outline-light" type="button" onClick={handleSearch}>
-                Search
+                <Search/>
               </button>
             </div>
 

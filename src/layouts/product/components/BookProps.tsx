@@ -3,6 +3,7 @@ import BookModel from "../../../models/BookModel";
 import BookImageModel from "../../../models/BookImageModel";
 import { getAllImages } from "../../../api/BookImageAPI";
 import { Link } from "react-router-dom";
+import numberFormat from "../../util/NumberFormat";
 
 interface BookProps {
     book: BookModel;
@@ -65,7 +66,7 @@ const BookProps: React.FC<BookProps> = ({ book }) => {
                         <p className="card-text">{book.description}</p>
                         <p className="card-text">
                             <span className="text-decoration-line-through me-3">{book.listedPrice}</span>
-                            <span className="fw-bold">{book.price}</span>
+                            <span className="fw-bold">{numberFormat(book.price)} VND</span>
                         </p>
                     </div>
 
