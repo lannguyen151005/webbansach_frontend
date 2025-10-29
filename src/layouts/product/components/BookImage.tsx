@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import BookModel from "../../../models/BookModel";
 import BookImageModel from "../../../models/BookImageModel";
 import { getAllImages } from "../../../api/BookImageAPI";
-import { Link } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 
@@ -11,8 +9,6 @@ interface BookImageInterface {
 }
 
 const BookImage: React.FC<BookImageInterface> = ({ bookId }) => {
-
-    const id: number = bookId;
 
     const [imageList, setImageList] = useState<BookImageModel[]>([]);
     const [loadingData, setLoadingData] = useState(true);

@@ -5,11 +5,11 @@ import { getAllImages } from "../../../api/BookImageAPI";
 import { Link } from "react-router-dom";
 import numberFormat from "../../util/NumberFormat";
 
-interface BookProps {
+interface BookPropsInterface {
     book: BookModel;
 }
 
-const BookProps: React.FC<BookProps> = ({ book }) => {
+const BookProps: React.FC<BookPropsInterface> = ({ book }) => {
 
     const bookId = book.id;
 
@@ -28,7 +28,7 @@ const BookProps: React.FC<BookProps> = ({ book }) => {
                 setError(error.message);
             }
         )
-    }, []
+    }, [bookId]
     )
 
     if (loadingData) {

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BookModel from "../../models/BookModel";
-import BookImageModel from "../../models/BookImageModel";
-import { getAllImages } from "../../api/BookImageAPI";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getBookById } from "../../api/BookAPI";
 import BookImage from "./components/BookImage";
 import BookReview from "./components/BookReview";

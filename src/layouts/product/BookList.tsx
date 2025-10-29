@@ -17,11 +17,10 @@ function List({ keyword, genreId }: BookListProps) {
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPage, setTotalPage] = useState(0);
-    const [totalBook, setTotalBook] = useState(0);
 
 
     useEffect(() => {
-        if (keyword === "" && genreId ==0) {
+        if (keyword === "" && genreId ===0) {
             getAllBooks(currentPage - 1).then(
                 bookData => {
                     setBookList(bookData.result);

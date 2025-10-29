@@ -9,6 +9,7 @@ import List from './layouts/product/BookList';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import About from './layouts/about/About';
 import BookDetail from './layouts/product/BookDetail';
+import RegisterUser from './layouts/user/RegisterUser';
 function App() {
 
   const [keyword, setKeyWord] = useState("");
@@ -22,6 +23,7 @@ function App() {
           <Route path="/:genreId" element={<Homepage keyword={keyword} />} />
           <Route path="/books/:bookId" element={<BookDetail/>} />
           <Route path='/about' element={<About />} />
+          <Route path='/register' element={<RegisterUser/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
