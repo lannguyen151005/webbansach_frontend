@@ -20,7 +20,7 @@ function Navbar({ keyword, setKeyword }: NavbarProps) {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top ">
       <div className="container-fluid">
         <a className="navbar-brand fw-bold" href="#">
           Alan.vn

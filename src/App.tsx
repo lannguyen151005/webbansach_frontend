@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 import Navbar from './layouts/header-footer/Navbar';
 import Footer from './layouts/header-footer/Footer';
 import Homepage from './layouts/homepage/Homepage';
-import { getAllBooks } from './api/BookAPI';
-import List from './layouts/product/BookList';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import About from './layouts/about/About';
 import BookDetail from './layouts/product/BookDetail';
 import RegisterUser from './layouts/user/RegisterUser';
+import AccountActivation from './layouts/user/AccountActivation';
+
 function App() {
 
   const [keyword, setKeyWord] = useState("");
@@ -24,6 +24,7 @@ function App() {
           <Route path="/books/:bookId" element={<BookDetail/>} />
           <Route path='/about' element={<About />} />
           <Route path='/register' element={<RegisterUser/>}/>
+          <Route path='/activate/:email/:activeCode' element={<AccountActivation/>}/> 
         </Routes>
         <Footer />
       </BrowserRouter>
