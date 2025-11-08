@@ -9,6 +9,10 @@ import About from './layouts/about/About';
 import BookDetail from './layouts/product/BookDetail';
 import RegisterUser from './layouts/user/RegisterUser';
 import AccountActivation from './layouts/user/AccountActivation';
+import Login from './layouts/user/Login';
+import { Test } from './layouts/user/Test';
+
+import BookForm_Admin from './layouts/admin/BookForm';
 
 function App() {
 
@@ -25,6 +29,9 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/register' element={<RegisterUser/>}/>
           <Route path='/activate/:email/:activeCode' element={<AccountActivation/>}/> 
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/test' element={<Test/>}/>
+          <Route path='/admin/book-form' element={<BookForm_Admin/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>

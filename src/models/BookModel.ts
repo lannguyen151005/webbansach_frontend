@@ -8,7 +8,7 @@ class BookModel {
         private _description?: string,
         private _quantity?: number,
         private _author?: string,
-        private _averageRating?: number,
+        private _averageRating?: number
     ) { }
 
     // Getter & Setter cho id
