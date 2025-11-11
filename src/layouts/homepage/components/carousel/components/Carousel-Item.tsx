@@ -49,7 +49,7 @@ const Carousel_Item: React.FC<BookProps> = ({ book, index }) => {
                 <div className="col-5">
                     {
                         imageList[0] && imageList[0].data &&
-                        <img src={imageList[0].data} className="float-end" alt="..." style={{ width: '200px' }} />
+                        <img src={imageList[0].data} className="float-end img-fluid rounded shadow-sm" alt="..." style={{ maxWidth: '150px', height: '170px'}} />
                     }
                 </div>
                 <div className="col-7 text-start">

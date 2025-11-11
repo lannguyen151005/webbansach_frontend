@@ -41,7 +41,7 @@ function Carousel() {
     }
 
     return (
-        <div>
+        <div className="m-5">
             <div id="carouselExampleDark" className="carousel carousel-dark slide">
 
                 <div className="carousel-inner">

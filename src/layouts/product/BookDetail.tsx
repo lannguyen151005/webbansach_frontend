@@ -6,10 +6,11 @@ import BookImage from "./components/BookImage";
 import BookReview from "./components/BookReview";
 import renderRating from "../util/StarRating";
 import numberFormat from "../util/NumberFormat";
+import { useCartStore } from "../store/CartStore";
 
 
 const BookDetail: React.FC = () => {
-
+    const cartStore = useCartStore();
     const { bookId } = useParams();
 
     let bookIdNumber = 0;
@@ -56,10 +57,13 @@ const BookDetail: React.FC = () => {
 
     }
 
+    //Add
+   
     const handleAddToCart = () => {
-
+     
     }
 
+  
     useEffect(
         () => {
             getBookById(bookIdNumber).then(
@@ -99,7 +103,6 @@ const BookDetail: React.FC = () => {
             </div>
         )
     }
-
     return (
         <div className="container">
             <div className="row mt-4 mb-4">
@@ -152,7 +155,7 @@ const BookDetail: React.FC = () => {
                                     }
                                 </div>
                                 <button type="button" className="btn btn-primary mt-3 form-control" onClick={handleBuyNow}>Buy now</button>
-                                <button type="button" className="btn btn-secondary mt-2 form-control" onClick={handleAddToCart}>Add to cart</button>
+                                <button type="button" className="btn btn-secondary mt-2 form-control" onClick={() => {cartStore.add({book: book, bookId: bookIdNumber, quantity: 1})}}>Add to cart</button>
                             </div>
                         </div>
                     </div>

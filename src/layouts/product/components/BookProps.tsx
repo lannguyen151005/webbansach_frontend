@@ -4,6 +4,7 @@ import BookImageModel from "../../../models/BookImageModel";
 import { getAllImages } from "../../../api/BookImageAPI";
 import { Link } from "react-router-dom";
 import numberFormat from "../../util/NumberFormat";
+import "./BookProps.css"
 
 interface BookPropsInterface {
     book: BookModel;
@@ -47,8 +48,8 @@ const BookProps: React.FC<BookPropsInterface> = ({ book }) => {
         );
     }
     return (
-        <div className="col-3 mt-4">
-            <div className="card" style={{ width: '18rem' }}>
+        <div className="col-6 col-lg-3 mt-4 d-flex align-items-stretch ">
+            <div className="card w-100 d-flex flex-column h-100 shadow border " >
                 <div style={{ height: '200px' }}>
                     {
                         imageList[0] &&

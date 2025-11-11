@@ -11,11 +11,11 @@ function Navbar({ keyword, setKeyword }: NavbarProps) {
 
   const [tempKeyword, setTempKeyword] = useState('');
 
-  const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>)=>{
+  const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTempKeyword(e.target.value);
   }
 
-  const handleSearch= () =>{
+  const handleSearch = () => {
     setKeyword(tempKeyword);
   }
 
@@ -44,7 +44,17 @@ function Navbar({ keyword, setKeyword }: NavbarProps) {
           {/* Các liên kết bên trái */}
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/">
+              <NavLink
+                className="nav-link active"
+                aria-current="page"
+                to="/"
+                onClick={
+                  () => {
+                    setKeyword("");
+                    setTempKeyword("");
+                  }
+                }
+              >
                 Home
               </NavLink>
             </li>
@@ -130,16 +140,25 @@ function Navbar({ keyword, setKeyword }: NavbarProps) {
                 value={tempKeyword}
               />
               <button className="btn btn-outline-light" type="button" onClick={handleSearch}>
-                <Search/>
+                <Search />
               </button>
             </div>
 
             {/* Icon giỏ hàng và tài khoản */}
             <ul className="navbar-nav d-flex flex-row">
-              <li className="nav-item me-3">
-                <a className="nav-link" href="#">
+              <li className="nav-item me-3 dropdown">
+                <Link className="nav-link dropdown-toggle" id="navbarDropdown1" to="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
                   <i className="fas fa-shopping-cart fa-lg"></i>
-                </a>
+                </Link>
+                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown3" style={{maxWidth: "400px"}}>
+                  <div className="m-2 ms-3 me-3 rounded-3 p-1 text-center border border-2" style={{backgroundColor: '#F3F5F6'}}>
+                    CART
+                  </div>
+                  <li>
+                    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+                  </li>
+                </ul>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">

@@ -13,6 +13,8 @@ import Login from './layouts/user/Login';
 import { Test } from './layouts/user/Test';
 
 import BookForm_Admin from './layouts/admin/BookForm';
+import BookModel from './models/BookModel';
+import Cart from './layouts/cart/Cart';
 
 function App() {
 
@@ -21,7 +23,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar keyword={keyword} setKeyword={setKeyWord} />
+        <Navbar keyword={keyword} setKeyword={setKeyWord}/>
         <Routes>
           <Route path="/" element={<Homepage keyword={keyword} />} />
           <Route path="/:genreId" element={<Homepage keyword={keyword} />} />
@@ -32,6 +34,7 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/test' element={<Test/>}/>
           <Route path='/admin/book-form' element={<BookForm_Admin/>}/>
+          <Route path='/checkout' element={<Cart/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
