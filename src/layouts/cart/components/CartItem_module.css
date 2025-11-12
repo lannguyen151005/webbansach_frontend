@@ -1,0 +1,11 @@
+.image-container {
+  width: 50px;   /* chiều rộng div */
+  height: 50px;  /* chiều cao div */
+  overflow: hidden; /* ẩn phần img tràn ra */
+}
+
+.image-container img {
+  width: 100%;       /* chiếm toàn bộ chiều rộng div */
+  height: 100%;      /* chiếm toàn bộ chiều cao div */
+  object-fit: contain; /* giữ tỉ lệ ảnh, vừa trong div */
+}

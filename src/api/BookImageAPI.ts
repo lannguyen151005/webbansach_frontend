@@ -2,6 +2,7 @@ import React from "react";
 import BookImageModel from "../models/BookImageModel";
 import myRequest from "./Request";
 
+
 export async function getAllImages(id: number): Promise<BookImageModel[]> {
     const result: BookImageModel[] = [];
     const endpoint: string = `http://localhost:8080/books/${id}/imageList`;

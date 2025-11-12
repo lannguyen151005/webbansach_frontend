@@ -1,6 +1,10 @@
 import React, { ChangeEvent, useState } from "react";
 import { Search } from "react-bootstrap-icons";
 import { Link, NavLink } from "react-router-dom";
+import CartItem from "../cart/components/CartItem";
+import { useCartStore } from "../store/CartStore";
+import './Navbar_modules.css'
+import numberFormat from "../util/NumberFormat";
 
 interface NavbarProps {
   keyword: string;
@@ -8,6 +12,8 @@ interface NavbarProps {
 }
 
 function Navbar({ keyword, setKeyword }: NavbarProps) {
+
+  const cartStore = useCartStore()
 
   const [tempKeyword, setTempKeyword] = useState('');
 
@@ -19,6 +25,16 @@ function Navbar({ keyword, setKeyword }: NavbarProps) {
     setKeyword(tempKeyword);
   }
 
+  const getCartTotal = () => {
+    return cartStore.list.reduce(
+      (sum, product) => sum + (product.book.price ?? 0) * product.quantity,
+      0
+    );
+  };
+
+  const deleteProduct = (id:number) => {
+    return cartStore.delete({bookId: id});
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top ">
       <div className="container-fluid">
@@ -122,9 +138,9 @@ function Navbar({ keyword, setKeyword }: NavbarProps) {
             </li>
 
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link to={"/checkout"} className="nav-link" >
                 Contact Us
-              </a>
+              </Link>
             </li>
           </ul>
 
@@ -146,19 +162,55 @@ function Navbar({ keyword, setKeyword }: NavbarProps) {
 
             {/* Icon giỏ hàng và tài khoản */}
             <ul className="navbar-nav d-flex flex-row">
-              <li className="nav-item me-3 dropdown">
-                <Link className="nav-link dropdown-toggle" id="navbarDropdown1" to="#" role="button" data-bs-toggle="dropdown"
+              <li className="nav-item me-3 dropdown shadow-lg">
+                <a className="nav-link dropdown-toggle" id="navbarDropdown1" data-bs-auto-close="outside" href="#" role="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   <i className="fas fa-shopping-cart fa-lg"></i>
-                </Link>
-                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown3" style={{maxWidth: "400px"}}>
-                  <div className="m-2 ms-3 me-3 rounded-3 p-1 text-center border border-2" style={{backgroundColor: '#F3F5F6'}}>
-                    CART
+                </a>
+                <ul className="dropdown-menu dropdown-menu-end shadow cart-dropdown" aria-labelledby="navbarDropdown3">
+                  <div className="cart-container">
+                    {/* Header */}
+                    <div className="cart-header">
+                      CART
+                    </div>
+
+                    {/* Danh sách sản phẩm - có thể cuộn */}
+                    {/* onClick={e => e.stopPropagation()} ở container bao quanh các nút =>  dropdown không tự đóng.*/}
+                    <div className="cart-items" onClick={(e) => e.stopPropagation()}>
+                      {cartStore.list.length > 0 ? (
+                        cartStore.list.map((prod, index) => (
+                          <div key={index}>
+                            <CartItem book={prod.book} quantity={prod.quantity} deleteProduct={deleteProduct} />
+                          </div>
+                        ))
+                      ) : (
+                        <div className="text-center text-muted py-3">
+                          <div className="d-flex flex-column">
+                            <h1><i className="fas fa-shopping-cart fa-lg cart-icon"></i></h1>
+                            <span>No items in your cart.</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+
+                    {/* Tổng tiền */}
+                    <div className="cart-total text-secondary px-3">
+                      TOTAL: {numberFormat(getCartTotal())}đ
+                    </div>
+
+                    {/* Nút hành động cố định */}
+                    <div className="cart-actions">
+                      <Link to={"/checkout"}>
+                        <button className="btn cart-btn">VIEW CART</button>
+                      </Link>
+                      <Link to={"/checkout"}>
+                        <button className="btn cart-btn">PAY NOW</button>
+                      </Link>
+                    </div>
                   </div>
-                  <li>
-                    dddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-                  </li>
                 </ul>
+
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">
